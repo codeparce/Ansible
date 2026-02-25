@@ -1,0 +1,39 @@
+---
+- name: Configurar servidor NFS
+  hosts: nfs-server
+  become: true
+
+  vars:
+    nfs_export_dir: /srv/nfs
+    allowed_network: 192.168.100.0/24
+
+  tasks:
+    - name: Instalar paquetes NFS
+      apt:
+        name: [nfs-kernel-server]
+        state: present
+        update_cache: yes
+
+    - name: Crear directorio de exportación
+      file:
+        path: "{{ nfs_export_dir }}"
+        state: directory
+        owner: nobody
+        group: nogroup
+        mode: "0777"
+
+    - name: Configurar exports
+      lineinfile:
+        path: /etc/exports
+        line: "{{ nfs_export_dir }} {{ allowed_network }}(rw,sync,no_subtree_check,no_root_squash)"
+        create: yes
+        state: present
+
+    - name: Exportar directorios NFS
+      command: exportfs -a
+
+    - name: Reiniciar servicio NFS
+      service:
+        name: nfs-kernel-server
+        state: restarted
+        enabled: yes

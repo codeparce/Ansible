@@ -26,10 +26,14 @@ cat /etc/ssh/sshd_config
 ```bash 
 # apagar vms
 vagrant halt
+vagrant resume 
+
 # destruir vms
 vagrant destroy -f 
 # levantar vms
 vagrant up
+
+
 # para acceder a la vm
 vagrant ssh
 

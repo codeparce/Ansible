@@ -72,10 +72,6 @@
         groups: docker
         append: yes
 
-    # - name: Agregar usuario al grupo docker por comando
-    #   command: >
-    #     sudo groupadd docker && sudo usermod -aG docker $USER &&  newgrp docker
-
     # =========================
     # CONFIGURAR LOGS DOCKER
     # =========================
@@ -95,6 +91,21 @@
         group: root
         mode: '0644'
       notify: Restart docker
+
+    # =========================
+    # INSTALAR HELM
+    # =========================
+
+    - name: Descargar el script de instalación de Helm
+      get_url:
+        url: https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+        dest: /tmp/get-helm-3
+        mode: '0755'
+
+    - name: Ejecutar el script para instalar Helm
+      command: /tmp/get-helm-3
+      args:
+        creates: /usr/local/bin/helm
 
     # =========================
     # INSTALAR KUBECTL
@@ -128,6 +139,7 @@
         --agents 1
         -p 80:80@loadbalancer
         -p 8080:8080@loadbalancer
+        -p "443:443@loadbalancer"
      # when: "'dev' not in k3d_clusters.stdout"
 
     - name: Crear kubeconfig del clsuter
@@ -136,7 +148,7 @@
 
     - name: get Repo kubernetes
       command: >
-        git clone https://github.com/codeparce/kubernetes.git
+        git clone https://github.com/codeparce/kubernetes.git  
 
   handlers:
     - name: Restart docker
