@@ -1,2 +1,4 @@
 *.pub
 id_rsa*
+
+.vagrant

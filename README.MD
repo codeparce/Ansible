@@ -26,6 +26,8 @@ docker inspect -f '{{.Name}} {{range .NetworkSettings.Networks}}{{.IPAddress}}{{
 
 ```bash 
 ansible-playbook -i hosts tools_basic.yml
+
+ansible-playbook -i inventory.ini playbook.yml
 ```
 
 ### Maquinas virtuales linux
