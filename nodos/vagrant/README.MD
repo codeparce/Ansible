@@ -1,7 +1,8 @@
 
 # Vagrant 
 
-**NOTA:** Es un orquestador de vms no es muy usado actualmente por docker
+**NOTA:** Es un orquestador de vms no es muy usado actualmente por docker pero funcionar muy bien para labs y simulaciones 
+
 **NOTA:** Debes intalar [virtual box](https://www.virtualbox.org/wiki/Downloads) primero
 
 

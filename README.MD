@@ -1,6 +1,8 @@
 # Ansible + Vagrant + Docker + VMs
 
-Para Levantar el laboratorio recomiendo instalar wsl , para simular vms con docker 
+Para Levantar el **laboratorio** recomiendo instalar wsl y utilziar la solucion Vagrant
+
+Para levantar **multiples nodos** pero contareas pequñas usar docker
 
 ## Instalar Ansible
 
@@ -10,21 +12,19 @@ sudo apt install ansible -y
 ansible --version
 
 ```
-## Levnatar vms(contendores)
+---
 
-```bash 
-cd Docker 
+**Primero** se deberia levantar las vms para hacer las practicas 
 
-docker compose up -d --build
-
-# ver ips de vms
-docker inspect -f '{{.Name}} {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -q)
+#### - [VMs con docker](./nodos/Docker/README.MD)
+#### - [Vms con Vagrant y VB](./nodos/vagrant/README.MD)
 
 
-```
 ## Correr playbook
 
 ```bash 
+cd playbook
+
 ansible-playbook -i hosts tools_basic.yml
 
 ansible-playbook -i inventory.ini playbook.yml
