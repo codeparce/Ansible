@@ -1,9 +1,11 @@
 
 # Vagrant 
 
-    NOTA: Es un orquestador de vms no muy usado actualmente por docker
+**NOTA:** Es un orquestador de vms no es muy usado actualmente por docker
+**NOTA:** Debes intalar [virtual box](https://www.virtualbox.org/wiki/Downloads) primero
 
-NOta: si se genera este error
+
+## si se genera este error
 
 ```bash 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

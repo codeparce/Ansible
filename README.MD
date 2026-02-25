@@ -1,4 +1,4 @@
-# Ansible + WSL + Docker
+# Ansible + Vagrant + Docker + VMs
 
 Para Levantar el laboratorio recomiendo instalar wsl , para simular vms con docker 
 
