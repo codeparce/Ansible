@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
 
   # 💾 Configuración de memoria, CPU y disco
   config.vm.provider "virtualbox" do |vb|
-    vb.memory = "5807"   # 8 GB de RAM
-    vb.cpus = 3          # 2 CPUs
+    vb.memory = "8107"   # 8 GB de RAM
+    vb.cpus = 4          # 2 CPUs
   end
 end
