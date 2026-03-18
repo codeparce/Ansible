@@ -14,7 +14,7 @@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 ## realizar este comando a la ip que quieres ingresar
-ssh-keygen -R 192.168.100.183
+ssh-keygen -R 192.168.100.185
 
 ## Validar configuracion
 cat /etc/ssh/sshd_config 

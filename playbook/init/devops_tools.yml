@@ -1,15 +1,17 @@
 ---
-- name: Configurar servidor Kubernetes base
+- name: Configurar Herramientas DevOps
   hosts: devopslab
   become: true
 
   tasks:
-
     - name: Actualizar apt
       apt:
         update_cache: yes
         upgrade: dist
 
+    # =========================
+    # PAQUETES BASE
+    # =========================
     - name: Instalar paquetes base
       apt:
         name:
@@ -19,15 +21,46 @@
           - git
           - jq 
           - gettext-base 
+          - software-properties-common
           - gnupg
           - lsb-release
+        update_cache: yes
         state: present
 
-    - name: Habilitar y arrancar SSH
-      service:
-        name: ssh
-        state: started
-        enabled: yes
+    # =========================
+    # BUN
+    # =========================
+    - name: Instalar Bun
+      shell: curl -fsSL https://bun.sh/install | bash
+      args:
+        creates: /home/vagrant/.bun/bin/bun
+      become: no
+
+    # =========================
+    # TERRAFORM
+    # =========================
+    - name: Agregar clave GPG de HashiCorp
+      get_url:
+        url: https://apt.releases.hashicorp.com/gpg
+        dest: /tmp/hashicorp.gpg
+
+    - name: Convertir clave a keyring
+      command: >
+        gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg /tmp/hashicorp.gpg
+      args:
+        creates: /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+    - name: Agregar repositorio de HashiCorp
+      apt_repository:
+        repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+        filename: hashicorp
+        state: present
+
+    - name: Instalar Terraform
+      apt:
+        name: terraform
+        state: present
+        update_cache: yes
 
     # =========================
     # INSTALACIÓN DOCKER
@@ -72,10 +105,7 @@
         groups: docker
         append: yes
 
-    # =========================
     # CONFIGURAR LOGS DOCKER
-    # =========================
-
     - name: Configurar logging driver json-file
       copy:
         dest: /etc/docker/daemon.json

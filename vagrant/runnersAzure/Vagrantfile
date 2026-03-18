@@ -1,0 +1,21 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/jammy64"
+  config.vm.hostname = "runner-server-azure"
+
+  # 🌐 Red en modo puente (bridged)
+  config.vm.network "public_network", bridge: nil
+
+  # 🔐 Habilitar contraseña para el usuario vagrant
+  config.vm.provision "shell", inline: <<-SHELL
+    echo "vagrant:vagrant" | chpasswd
+    sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+    sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+    systemctl restart ssh
+  SHELL
+
+  # 💾 Configuración de memoria, CPU y disco
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "4556"   # 8 GB de RAM
+    vb.cpus = 3          # 2 CPUs
+  end
+end

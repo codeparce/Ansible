@@ -1,0 +1,4 @@
+- import_playbook: devops_tools.yml
+- import_playbook: k3s.yml
+- import_playbook: nfs.yml
+- import_playbook: agent_azure.yml

@@ -1,0 +1,34 @@
+---
+- name: Configurar Agente Azure
+  hosts: devopslab
+  become: true
+
+  tasks:
+    - name: Crear carpeta /myagent 
+      file:
+        path: /home/vagrant/myagent
+        state: directory
+        owner: vagrant
+        group: vagrant
+
+    - name: descargar el tar.gz del agente de Azure
+      get_url:
+        url: https://download.agent.dev.azure.com/agent/4.270.0/vsts-agent-linux-x64-4.270.0.tar.gz
+        dest: /tmp/vsts-agent-linux-x64-4.270.0.tar.gz
+        owner: vagrant
+        group: vagrant
+        mode: '0644'
+        
+    - name: Descomprimir el tar del agente de Azure
+      unarchive:
+        src: /tmp/vsts-agent-linux-x64-4.270.0.tar.gz
+        dest: /home/vagrant/myagent
+        remote_src: yes
+        owner: vagrant
+        group: vagrant
+
+    - name: Instalar Azure CLI
+      shell: curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+      args:
+        creates: /usr/bin/az
+      become: yes

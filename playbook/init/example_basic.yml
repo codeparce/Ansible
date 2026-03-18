@@ -1,5 +1,5 @@
 - name: Crear carpeta de prueba
-  hosts: nodes
+  hosts: node
   become: true
 
   tasks:
