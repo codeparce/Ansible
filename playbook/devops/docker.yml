@@ -1,6 +1,6 @@
 ---
-- name: Configurar Herramientas DevOps
-  hosts: devopslab
+- name: Configurar Docker
+  hosts: docker
   become: true
 
   tasks:

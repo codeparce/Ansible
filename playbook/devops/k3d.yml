@@ -50,19 +50,13 @@
       args:
         creates: /usr/local/bin/k3d
 
-    - name: Crear cluster k3d dev
-      command: >
-        k3d cluster create dev
-        --servers 1
-        --agents 1
-        -p 80:80@loadbalancer
-        -p 8080:8080@loadbalancer
-        -p "443:443@loadbalancer"
+    # - name: Crear cluster k3d dev
+    #   command: >
+    #     k3d cluster create dev \
+    #     --servers 1 --agents 1 \
+    #     -p "80:80@loadbalancer" -p "8080:8080@loadbalancer"  -p "5050:5050@loadbalancer"\ 
+    #     -v /srv:/mnt@all
      # when: "'dev' not in k3d_clusters.stdout"
-
-    - name: Crear kubeconfig del clsuter
-      command: >
-        mkdir -p ~/.kube && k3d kubeconfig get dev > ~/.kube/config 
 
     - name: get Repo kubernetes
       command: >

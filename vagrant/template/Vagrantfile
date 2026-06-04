@@ -1,16 +1,17 @@
+
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/jammy64"
-  config.vm.hostname = "devops-server"
+  config.vm.hostname = "lab-vm-kb"
 
   # 🌐 Red en modo puente (bridged)
-  config.vm.network "public_network", bridge: nil
+  config.vm.network "public_network", bridge: "Intel"
 
   # 💽 Tamaño del disco 
-  config.disksize.size = '80GB'
+  config.disksize.size = "50GB"
 
   # 💾 Configuración de memoria, CPU y disco
   config.vm.provider "virtualbox" do |vb|
-    vb.memory = "8107"   # 8 GB de RAM
-    vb.cpus = 4          # 2 CPUs
+    vb.memory = "6556"
+    vb.cpus = "2" 
   end
 end

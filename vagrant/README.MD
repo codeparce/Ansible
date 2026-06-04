@@ -1,12 +1,49 @@
 
 # Vagrant 
 
-**NOTA:** Es un orquestador de vms no es muy usado actualmente por docker pero funcionar muy bien para labs y simulaciones 
+**NOTA:** Es un orquestador de vms no es muy usado, actualmente docker es la mejor opción. pero funcionar muy bien para labs y simulaciones.
 
-**NOTA:** Debes intalar [virtual box](https://www.virtualbox.org/wiki/Downloads) primero
+**NOTA:** Debes intalar [virtual box](https://www.virtualbox.org/wiki/Downloads) primero.
+
+## Instalacion de plugins 
+
+```bash
+vagrant plugin install vagrant-disksize
+```
+
+### Comandos bases
+
+```bash 
+# apagar o reanudar vms
+vagrant halt
+vagrant resume 
+
+# destruir vms
+vagrant destroy -f 
+# levantar vms
+vagrant up
+
+# para acceder a la vm
+vagrant ssh
+```
+
+### SSH entry
+
+```bash
+# 1 ver clabe publica de tu maquina windows 
+type $env:USERPROFILE\.ssh\id_rsa.pub   # 2. copiar clave (opcional)
+# 1.1 ver en el wsl 
+cat ~/.ssh/id_rsa.pub # 2. copiar clave (opcional)
+ 
+
+# 3. pegar dentro del servidor vm
+nano ~/.ssh/authorized_keys 
+```
 
 
-## si se genera este error
+## Errors
+
+## Error por cambio de ip 
 
 ```bash 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -19,30 +56,3 @@ ssh-keygen -R 192.168.100.185
 ## Validar configuracion
 cat /etc/ssh/sshd_config 
 ```
-
-
-### Comandos bases
-
-```bash 
-# apagar vms
-vagrant halt
-vagrant resume 
-
-# destruir vms
-vagrant destroy -f 
-# levantar vms
-vagrant up
-
-
-# para acceder a la vm
-vagrant ssh
-
-
-# ver key en power
-type $env:USERPROFILE\.ssh\id_rsa.pub  
-
-cp /home/jdorado/.ssh/id_rsa.pub  .
-
-nano .ssh/authorized_keys 
-```
-

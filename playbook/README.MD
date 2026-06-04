@@ -2,7 +2,7 @@
 
 Para Levantar el laboratorio recomiendo instalar wsl o levantar maquina con vagrant
 
-## Instalar Ansible
+## Instalar Ansible (linux)
 
 ```bash 
 sudo apt update
@@ -15,6 +15,7 @@ ansible --version
 
 ```bash 
 
-ansible-playbook -i inventory.ini ./init/agent_azure.yml
+ansible-playbook -i inventory.ini ./devops/site.yml
+
 ```
 
