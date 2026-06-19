@@ -5,7 +5,7 @@
 
   vars:
     nfs_export_dir: /srv/nfs
-    allowed_network: 192.168.100.0/24
+    allowed_network: xxx.xxx.xxx.0/24
 
   tasks:
     - name: Instalar paquetes NFS

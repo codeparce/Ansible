@@ -51,7 +51,7 @@ nano ~/.ssh/authorized_keys
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 ## realizar este comando a la ip que quieres ingresar
-ssh-keygen -R 192.168.100.185
+ssh-keygen -R xxx.xxx.xxx.xxx
 
 ## Validar configuracion
 cat /etc/ssh/sshd_config 
